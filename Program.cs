@@ -18,7 +18,7 @@ namespace MoodTracker
         public static EditForm EditForm = new EditForm();
         public static OpenDateForm OpenDateForm = new OpenDateForm();
 
-        public static Date Date = new Date(DateTime.Now.ToString("dd/MM/yyyy"));
+        public static Date Date = new Date(2022, 2, 3);//new Date(DateTime.Now.ToString("dd/MM/yyyy"));
 
         public static readonly Database Database = new Database();
         public static DayData CurrentData;

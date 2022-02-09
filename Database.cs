@@ -9,14 +9,17 @@ namespace MoodTracker
     {
         private DatabaseReader _databaseReader = new DatabaseReader();
         public List<DayData> Data;
+        public Date SelectedDate;
 
         public Database()
         {
-            Data = _databaseReader.Read();
-            //Program.Database.Data = ReadJson(Program.Date);
-            var data = _databaseReader.ReadJson(Program.Date);
+            SelectedDate = Program.Date;
+            Data = _databaseReader.ReadJson(Program.Date);
+
+            SortData();
+
             Debug.WriteLine("READ IN JSON");
-            foreach (var d in data)
+            foreach (var d in Data)
             {
                 Debug.WriteLine(d.ToString());
             }
@@ -28,15 +31,13 @@ namespace MoodTracker
                 return;
 
             Data.Add(Program.CurrentData);
-            _databaseReader.Write(Program.CurrentData);
         }
 
         public DayData CreateData(Date date)
         {
-            Debug.WriteLine(date.ToString());
             DayData lastData = GetData(Data.Count - 1);
             DayData newData;
-            if (lastData.Date.Equals(date))
+            if (!(lastData is null) && lastData.Date.Equals(date))
                 newData = lastData;
             else
             {
@@ -48,7 +49,7 @@ namespace MoodTracker
 
         public DayData GetData(int idx)
         {
-            if (Data.Count - 1 < idx)
+            if (Data.Count == 0 || Data.Count - 1 < idx)
                 return null;
             return Data[idx];
         }
@@ -60,17 +61,39 @@ namespace MoodTracker
             
         }
         
-        public bool SelectDate(Date date)
+        public bool SelectDate(int next)
         {
-            //if ()
-            return false;
+            Date nextDate = _databaseReader.ReadNextDate(next);
+
+            if (nextDate is null)
+                return false;
+
+            Debug.WriteLine(nextDate.ToString());
+
+            SelectedDate = nextDate;
+            Data = _databaseReader.ReadJson(SelectedDate);
+            return true;
         }
         
         public void SaveData()
         {
-            _databaseReader.WriteAll(Data);
+            Debug.WriteLine("READ BEFORE CLOSE");
+            foreach (var d in Data)
+            {
+                Debug.WriteLine(d.ToString());
+            }
             _databaseReader.WriteJson();
         }
-        
+
+        private void SortData()
+        {
+            Data.Sort(delegate (DayData d1, DayData d2)
+            {
+                if (d1.Date == null && d2.Date == null) return 0;
+                else if (d1.Date == null) return -1;
+                else if (d2.Date == null) return 1;
+                else return d1.Date.CompareTo(d2.Date);
+            });
+        }
     }
 }

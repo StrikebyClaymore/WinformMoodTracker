@@ -24,7 +24,7 @@ namespace MoodTracker
 
         public override string ToString()
         {
-            return $"{Date.ToString()} {Mood} {Note}";
+            return $"{Date} {Mood} {Note}";
         }
     }
 }

@@ -30,7 +30,6 @@ namespace MoodTracker.Forms
         private void InitializeComponent()
         {
             this.CloseButton = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
             this.DateGrid = new System.Windows.Forms.TableLayoutPanel();
             this.Next = new System.Windows.Forms.Button();
             this.Previuos = new System.Windows.Forms.Button();
@@ -51,16 +50,6 @@ namespace MoodTracker.Forms
             this.CloseButton.TabIndex = 4;
             this.CloseButton.UseVisualStyleBackColor = true;
             this.CloseButton.Click += new System.EventHandler(this.CloseButton_Click);
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(12, 396);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(59, 58);
-            this.button3.TabIndex = 7;
-            this.button3.Text = "button3";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // DateGrid
             // 
@@ -128,13 +117,11 @@ namespace MoodTracker.Forms
             this.Controls.Add(this.Previuos);
             this.Controls.Add(this.Next);
             this.Controls.Add(this.DateGrid);
-            this.Controls.Add(this.button3);
             this.Controls.Add(this.CloseButton);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "OpenDateForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Дневник настроения";
-            //this.VisibleChanged += new System.EventHandler(this.OpenDialog_Shown);
             this.Shown += new System.EventHandler(this.OpenDialog_Shown);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -144,7 +131,6 @@ namespace MoodTracker.Forms
         #endregion
 
         private System.Windows.Forms.Button CloseButton;
-        private System.Windows.Forms.Button button3;
         private System.Windows.Forms.TableLayoutPanel DateGrid;
         private System.Windows.Forms.Button Next;
         private System.Windows.Forms.Button Previuos;

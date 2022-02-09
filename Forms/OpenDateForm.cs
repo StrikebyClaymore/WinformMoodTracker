@@ -5,7 +5,6 @@ namespace MoodTracker.Forms
 {
     public partial class OpenDateForm : BaseForm
     {
-        private Date _currentDate = new Date(DateTime.Now.ToString("dd/MM/yyyy"));
         private bool _dateIsSet = false;
 
         public OpenDateForm()
@@ -20,15 +19,7 @@ namespace MoodTracker.Forms
 
         private void OpenDialog_Shown(Object sender, EventArgs e)
         {
-            /*   if (!Visible)
-                   return;*/
             SetData();
-        }
-
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void SetData()
@@ -36,6 +27,12 @@ namespace MoodTracker.Forms
             if (_dateIsSet)
                 return;
             _dateIsSet = true;
+
+            DateGrid.Controls.Clear();
+
+            string[] date = Program.Database.SelectedDate.ToString().Split('.');
+            date[1] = new DateTime(int.Parse(date[2]), int.Parse(date[1]), int.Parse(date[0])).ToString("MMMM").Split(' ')[0];
+            CurrentDate.Text = date[1] + " " + date[2];
 
             for (int i = 0; i < Program.Database.Data.Count; i++)
             {
@@ -87,6 +84,7 @@ namespace MoodTracker.Forms
         {
             Button button = sender as Button;
             Program.CurrentData = Program.Database.GetData(button.Text);
+            FormsController.OpenForm(Program.OpenDateForm, Program.ChoiceForm);
         }
 
 
@@ -96,18 +94,16 @@ namespace MoodTracker.Forms
 
         private void Next_Click(object sender, EventArgs e)
         {
-            Date nextDate = new Date(_currentDate);
-            nextDate.Month = Math.Min(12, nextDate.Month + 1);
-            if (Program.Database.SelectDate(nextDate))
-                _currentDate = nextDate;
+            _dateIsSet = false;
+            if (Program.Database.SelectDate(1))
+                SetData();
         }
 
         private void Previous_Click(object sender, EventArgs e)
         {
-            Date nextDate = new Date(_currentDate);
-            nextDate.Month = Math.Max(0, nextDate.Month - 1);
-            if (Program.Database.SelectDate(nextDate))
-                _currentDate = nextDate;
+            _dateIsSet = false;
+            if (Program.Database.SelectDate(-1))
+                SetData();
         }
     }
 }
