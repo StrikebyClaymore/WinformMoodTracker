@@ -17,8 +17,9 @@ namespace MoodTracker
         public static ChoiceForm ChoiceForm = new ChoiceForm();
         public static EditForm EditForm = new EditForm();
         public static OpenDateForm OpenDateForm = new OpenDateForm();
+        public static StatisticForm StatisticForm = new StatisticForm();
 
-        public static Date Date = new Date(2022, 2, 3);//new Date(DateTime.Now.ToString("dd/MM/yyyy"));
+        public static Date Date = new Date(DateTime.Now.ToString("dd/MM/yyyy"));// new Date(2022, 2, 3);//
 
         public static readonly Database Database = new Database();
         public static DayData CurrentData;
@@ -29,6 +30,8 @@ namespace MoodTracker
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
+            //Application.Run(new StatisticForm());
 
             Initialize();
         }

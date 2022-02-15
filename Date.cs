@@ -46,13 +46,5 @@ namespace MoodTracker
         {
             return $"{Day}.{Month}.{Year}";
         }
-
-        public int CompareTo(Date date)
-        {
-            if (date == null)
-                return 1;
-            else
-                return ToString().CompareTo(date.ToString());
-        }
     }
 }

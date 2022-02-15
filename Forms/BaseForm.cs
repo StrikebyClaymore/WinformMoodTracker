@@ -19,7 +19,6 @@ namespace MoodTracker.Forms
 
         protected virtual void OnVisibleChanged(Object sender, EventArgs e)
         {
-            //Debug.WriteLine(Visible);
         }
 
         protected virtual void OnClosing(object sender, CancelEventArgs e)

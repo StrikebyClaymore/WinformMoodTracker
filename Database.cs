@@ -17,12 +17,6 @@ namespace MoodTracker
             Data = _databaseReader.ReadJson(Program.Date);
 
             SortData();
-
-            Debug.WriteLine("READ IN JSON");
-            foreach (var d in Data)
-            {
-                Debug.WriteLine(d.ToString());
-            }
         }
 
         public void AddData()
@@ -68,8 +62,6 @@ namespace MoodTracker
             if (nextDate is null)
                 return false;
 
-            Debug.WriteLine(nextDate.ToString());
-
             SelectedDate = nextDate;
             Data = _databaseReader.ReadJson(SelectedDate);
             return true;
@@ -77,11 +69,6 @@ namespace MoodTracker
         
         public void SaveData()
         {
-            Debug.WriteLine("READ BEFORE CLOSE");
-            foreach (var d in Data)
-            {
-                Debug.WriteLine(d.ToString());
-            }
             _databaseReader.WriteJson();
         }
 
@@ -92,7 +79,7 @@ namespace MoodTracker
                 if (d1.Date == null && d2.Date == null) return 0;
                 else if (d1.Date == null) return -1;
                 else if (d2.Date == null) return 1;
-                else return d1.Date.CompareTo(d2.Date);
+                else return d1.Date.Day.CompareTo(d2.Date.Day);
             });
         }
     }

@@ -12,7 +12,7 @@ namespace MoodTracker.Forms
 
         private void Statistic_Click(object sender, EventArgs e)
         {
-            //FormsController.OpenForm(Program.mainForm, Program.statiscticForm);
+            FormsController.OpenForm(Program.MainForm, Program.StatisticForm);
         }
 
         private void EditMoods_Click(object sender, EventArgs e)

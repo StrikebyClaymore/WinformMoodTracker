@@ -16,8 +16,6 @@ namespace MoodTracker
         {
             string jsonStringData = _jsonDataConverter.DataConvertToJson();
 
-            //Debug.WriteLine(jsonStringData);
-
             File.WriteAllText(JsonDataPath, jsonStringData);
         }
         
@@ -27,8 +25,6 @@ namespace MoodTracker
                 return new List<DayData>();
 
             string jsonStringData = File.ReadAllText(JsonDataPath);
-            
-            //Debug.WriteLine(jsonStringData);
             
             if (jsonStringData is null || jsonStringData == "")
                 return new List<DayData>();
